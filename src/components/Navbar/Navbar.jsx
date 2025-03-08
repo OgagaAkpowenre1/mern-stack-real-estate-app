@@ -4,8 +4,6 @@ import "./navbar.scss";
 export default function Navbar() {
   const [sidebarVisible,setSidebarVisible] = useState(false)
 
-  console.log(sidebarVisible)
-
   return (
     <nav>
       <div className="left">
