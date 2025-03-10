@@ -1,3 +1,11 @@
-curl -X POST "https://5000-ogagaakpowe-mernstackre-9fg5uj019rw.ws-eu118.gitpod.io/api/auth/register" \
+curl -v -X POST "http://localhost:5000/api/auth/register" \
 -H "Content-Type: application/json" \
 -d '{"username": "john", "email": "john@mail.com", "password": "123"}'
+
+
+curl -v -X POST "http://localhost:5000/api/auth/login" \
+-H "Content-Type: application/json" \
+-d '{"username": "john", "password": "123"}'
+
+curl -X POST "http://localhost:5000/api/auth/login" -c cookies.txt -d '{"username":"john", "password":"123"}' -H "Content-Type: application/json" -v
+
