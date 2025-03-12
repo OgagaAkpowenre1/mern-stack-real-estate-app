@@ -9,3 +9,23 @@ curl -v -X POST "http://localhost:5000/api/auth/login" \
 
 curl -X POST "http://localhost:5000/api/auth/login" -c cookies.txt -d '{"username":"john", "password":"123"}' -H "Content-Type: application/json" -v
 
+curl -X POST "http://localhost:5000/api/auth/login" \
+     -H "Content-Type: application/json" \
+     -d '{"username": "john", "password": "123"}' \
+     -c cookies.txt
+
+curl -X POST "http://localhost:5000/api/auth/logout" \
+     -H "Content-Type: application/json" \
+     -d '' \
+     -c cookies.txt
+
+curl -X OPTIONS "http://localhost:5000/api/auth/register" \
+     -H "Origin: http://localhost:5173" \
+     -H "Access-Control-Request-Method: POST"
+
+curl -X POST "http://localhost:5000/api/auth/register" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '{"username":"jacob","email":"jacob@mail.com","password":"123"}' \
+     -v
+

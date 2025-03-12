@@ -5,6 +5,9 @@ import Layout from "./pages/layout/Layout";
 import Login from "./pages/login/Login";
 import SinglePage from "./pages/singlePage/singlePage";
 import Profile from "./pages/profile/Profile";
+// import NewPost from "./pages/newPost/NewPost";
+// import ProfileUpdate from "./pages/profileUpdate/ProfileUpdate";
+import Register from "./pages/register/Register";
 
 function App() {
   const router = createBrowserRouter([
@@ -32,8 +35,31 @@ function App() {
           path: "/profile",
           element: <Profile />
         },
+        {
+          path: '/register',
+          element: <Register />
+        }
       ]
-    }
+    },
+    // {
+    //   path: "/",
+    //   element: <RequireAuth />,
+    //   children: [
+    //     {
+    //       path: "/profile",
+    //       element: <Profile />,
+    //       loader: profilePageLoader
+    //     },
+    //     {
+    //       path: "/profile/update",
+    //       element: <ProfileUpdate />,
+    //     },
+    //     {
+    //       path: "/add",
+    //       element: <NewPostPage />,
+    //     },
+    //   ],
+    // }
   ])
 
   return (
