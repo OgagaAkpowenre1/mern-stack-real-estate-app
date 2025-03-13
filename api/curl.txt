@@ -29,3 +29,21 @@ curl -X POST "http://localhost:5000/api/auth/register" \
      -d '{"username":"jacob","email":"jacob@mail.com","password":"123"}' \
      -v
 
+curl -X POST "http://localhost:5000/api/auth/login" \
+     -H "Content-Type: application/json" \
+     -d '{"username": "jacob", "password": "123"}' \
+     -c cookies.txt
+
+curl -X GET "http://localhost:5000/api/test/should-be-logged-in" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -b cookies.txt \
+     -v
+
+curl -X GET "http://localhost:5000/api/test/should-be-admin" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -b cookies.txt \
+     -v
