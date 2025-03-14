@@ -1,12 +1,12 @@
 import HomePage from "./pages/homePage/homePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListPage from "./pages/listPage/listPage";
-import Layout from "./pages/layout/Layout";
+import {Layout, RequireAuth} from "./pages/layout/Layout";
 import Login from "./pages/login/Login";
 import SinglePage from "./pages/singlePage/singlePage";
 import Profile from "./pages/profile/Profile";
 // import NewPost from "./pages/newPost/NewPost";
-// import ProfileUpdate from "./pages/profileUpdate/ProfileUpdate";
+import ProfileUpdate from "./pages/profileUpdate/ProfileUpdate";
 import Register from "./pages/register/Register";
 
 function App() {
@@ -41,25 +41,25 @@ function App() {
         }
       ]
     },
-    // {
-    //   path: "/",
-    //   element: <RequireAuth />,
-    //   children: [
-    //     {
-    //       path: "/profile",
-    //       element: <Profile />,
-    //       loader: profilePageLoader
-    //     },
-    //     {
-    //       path: "/profile/update",
-    //       element: <ProfileUpdate />,
-    //     },
-    //     {
-    //       path: "/add",
-    //       element: <NewPostPage />,
-    //     },
-    //   ],
-    // }
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <Profile />,
+          // loader: profilePageLoader
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdate />,
+        },
+        // {
+        //   path: "/add",
+        //   element: <NewPostPage />,
+        // },
+      ],
+    }
   ])
 
   return (

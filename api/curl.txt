@@ -31,7 +31,7 @@ curl -X POST "http://localhost:5000/api/auth/register" \
 
 curl -X POST "http://localhost:5000/api/auth/login" \
      -H "Content-Type: application/json" \
-     -d '{"username": "jacob", "password": "123"}' \
+     -d '{"username": "jacobUpdated2", "password": "12345"}' \
      -c cookies.txt
 
 curl -X GET "http://localhost:5000/api/test/should-be-logged-in" \
@@ -42,6 +42,76 @@ curl -X GET "http://localhost:5000/api/test/should-be-logged-in" \
      -v
 
 curl -X GET "http://localhost:5000/api/test/should-be-admin" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -b cookies.txt \
+     -v
+
+curl -X GET "http://localhost:5000/api/users/" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -v
+
+ids = [67ce4471eca3399269bf4bd1, 67d0d7c8c860e47ee784d671, 67d0d7fec860e47ee784d672]
+
+curl -X GET "http://localhost:5000/api/users/67d0d8e4972e48c1b2873f66" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -b cookies.txt \
+     -v
+
+curl -X PUT "http://localhost:5000/api/users/67d0d4bfafefe045be6fed91" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '{"password":"12345"}' \
+     -b cookies.txt \
+     -v
+
+curl -X GET "http://localhost:5000/api/posts" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -v
+
+POST IDS = [67d3968629066d2beee5b3ec, ]
+
+curl -X GET "http://localhost:5000/api/posts/" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -v
+
+curl -X POST "http://localhost:5000/api/posts/" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '{
+       "title": "Beautiful Apartment in the City 2",
+       "price": 120000,
+       "img": "https://example.com/image.jpg",
+       "address": "123 Main Street",
+       "city": "Los Angeles",
+       "bedroom": 2,
+       "bathroom": 1,
+       "latitude": "34.0522",
+       "longitude": "-118.2437",
+       "type": "buy",
+       "property": "apartment",
+       "userId": "67d0d4bfafefe045be6fed91"
+     }' \
+     -b cookies.txt \
+     -v
+
+curl -X PUT "http://localhost:5000/api/posts/:id" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '' \
+     -b cookies.txt \
+     -v
+
+curl -X DELETE "http://localhost:5000/api/posts/" \
      -H "Content-Type: application/json" \
      -H "Origin: http://localhost:5173" \
      -d '' \
