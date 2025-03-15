@@ -76,9 +76,9 @@ curl -X GET "http://localhost:5000/api/posts" \
      -d '' \
      -v
 
-POST IDS = [67d3968629066d2beee5b3ec, ]
+POST IDS = [67d4d6fa30e8e37fba9f934a, ]
 
-curl -X GET "http://localhost:5000/api/posts/" \
+curl -X GET "http://localhost:5000/api/posts/67d4d6fa30e8e37fba9f934a" \
      -H "Content-Type: application/json" \
      -H "Origin: http://localhost:5173" \
      -d '' \
@@ -111,9 +111,40 @@ curl -X PUT "http://localhost:5000/api/posts/:id" \
      -b cookies.txt \
      -v
 
-curl -X DELETE "http://localhost:5000/api/posts/" \
+curl -X DELETE "http://localhost:5000/api/posts/67d3968629066d2beee5b3ec" \
      -H "Content-Type: application/json" \
      -H "Origin: http://localhost:5173" \
      -d '' \
+     -b cookies.txt \
+     -v
+
+curl -X POST "http://localhost:5000/api/posts" \
+     -H "Content-Type: application/json" \
+     -H "Origin: http://localhost:5173" \
+     -d '{
+       "postData": {
+          "title": "Modern Apartment",
+       "price": 250000,
+       "images": ["https://example.com/image.jpg","https://example.com/image.jpg","https://example.com/image.jpg"],
+       "address": "123 Main St",
+       "city": "New York",
+       "bedroom": 3,
+       "bathroom": 2,
+       "latitude": "40.7128",
+       "longitude": "-74.0060",
+       "type": "buy",
+       "property": "apartment"
+       },
+       "postDetail": {
+         "desc": "Spacious and modern apartment in a prime location.",
+         "utilities": "Water, Electricity",
+         "pet": "Allowed",
+         "income": "50000",
+         "size": 1200,
+         "school": 5,
+         "bus": 2,
+         "restaurant": 8
+       }
+     }' \
      -b cookies.txt \
      -v

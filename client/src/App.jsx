@@ -5,7 +5,7 @@ import {Layout, RequireAuth} from "./pages/layout/Layout";
 import Login from "./pages/login/Login";
 import SinglePage from "./pages/singlePage/singlePage";
 import Profile from "./pages/profile/Profile";
-// import NewPost from "./pages/newPost/NewPost";
+import NewPostPage from "./pages/newPostPage/NewPostPage";
 import ProfileUpdate from "./pages/profileUpdate/ProfileUpdate";
 import Register from "./pages/register/Register";
 
@@ -54,10 +54,10 @@ function App() {
           path: "/profile/update",
           element: <ProfileUpdate />,
         },
-        // {
-        //   path: "/add",
-        //   element: <NewPostPage />,
-        // },
+        {
+          path: "/add",
+          element: <NewPostPage />,
+        },
       ],
     }
   ])

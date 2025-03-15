@@ -1,12 +1,12 @@
 import { useState } from "react";
-import "./newPost.scss";
+import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
 
-function NewPost() {
+function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
@@ -153,7 +153,7 @@ function NewPost() {
               <input min={0} id="restaurant" name="restaurant" type="number" />
             </div>
             <button className="sendButton">Add</button>
-            {error && <span>error</span>}
+            {error && <span>{error}</span>}
           </form>
         </div>
       </div>
@@ -163,9 +163,9 @@ function NewPost() {
         ))}
         <UploadWidget
           uwConfig={{
-            multiple: true,
-            cloudName: "lamadev",
+            cloudName: "du4vfhhym",
             uploadPreset: "estate",
+            multiple: true,
             folder: "posts",
           }}
           setState={setImages}
@@ -175,4 +175,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default NewPostPage;
