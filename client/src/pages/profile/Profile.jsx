@@ -1,14 +1,15 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLoaderData, Await } from "react-router-dom";
 import Chat from "../../components/Chat/Chat";
 import List from "../../components/List/List";
 import apiRequest from "../../lib/apiRequest";
 import "./profile.scss";
-import { useContext, useEffect } from "react";
+import { Suspense, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 function Profile() {
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
+  const data = useLoaderData()
 
   const handleLogout = async () => {
     try {
@@ -62,16 +63,45 @@ function Profile() {
                 <button>Create New Post</button>
               </Link>
             </div>
-            <List />
+            <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.postPromise}
+              errorElement={<p>Error loading posts!</p>}
+            >
+              {(postPromise) =>
+                <List posts={postPromise.data.userPosts} />
+              }
+            </Await>
+          </Suspense>
+            
             <div className="title">
               <h1>Saved List</h1>
             </div>
-            <List />
+            <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.postPromise}
+              errorElement={<p>Error loading posts!</p>}
+            >
+              {(postPromise) =>
+                <List posts={postPromise.data.savedPosts} />
+              }
+            </Await>
+          </Suspense>
           </div>
         </div>
         <div className="chatContainer">
           <div className="wrapper">
-            <Chat />
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.chatPromise}
+              errorElement={<p>Error loading chats!</p>}
+            >
+              {(chatPromise) =>
+                <Chat chats={chatPromise.data} />
+              }
+            </Await>
+          </Suspense>
+            
           </div>
         </div>
       </div>

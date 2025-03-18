@@ -10,3 +10,9 @@ export const listPageLoader = async ({ request, params }) => {
   const postResponse = await apiRequest("/posts?" + query);
   return { postResponse };  // No need for defer in older versions
 };
+
+export const profilePageLoader = async () => {
+  const postPromise = await apiRequest("/users/profilePosts");
+  const chatPromise = await apiRequest("/chats/");
+  return { postPromise, chatPromise };  // No need for defer in older versions
+};
