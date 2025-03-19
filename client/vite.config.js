@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "http://localhost:5000",
+      "/api": "https://mern-stack-real-estate-app.onrender.com",
       "/socket.io": { // Ensures WebSockets work through the proxy
         target: "http://localhost:4000",
         ws: true,

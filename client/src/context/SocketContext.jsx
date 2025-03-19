@@ -10,7 +10,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     setSocket(
-      io("https://4000-ogagaakpowe-mernstackre-9fg5uj019rw.ws-eu118.gitpod.io", {
+      io("https://mern-stack-real-estate-app-1.onrender.com", {
         transports: ["websocket"],
         withCredentials: true
       })
