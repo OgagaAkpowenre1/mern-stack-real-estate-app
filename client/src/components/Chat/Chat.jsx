@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { format } from "timeago.js";
 import { SocketContext } from "../../context/SocketContext";
+import { useNotificationStore } from "../../lib/notificationStore";
 
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
@@ -12,6 +13,8 @@ function Chat({ chats }) {
 
   const messageEndRef = useRef()
 
+  const decrease = useNotificationStore((state) => state.decrease);
+
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat]);
@@ -19,6 +22,9 @@ function Chat({ chats }) {
   const handleOpenChat = async (chatId, receiver) => {
     try {
       const res = await apiRequest("/chats/" + chatId);
+      if (!res.data.seenBy.includes(currentUser.id)) {
+        decrease();
+      }
       setChat({ ...res.data, receiver });
     } catch (error) {
       console.log(error);
@@ -71,26 +77,26 @@ function Chat({ chats }) {
     <div className="chat">
       <div className="messages">
         <h1>Messages</h1>
-        {chats?.map((chat) => (
+        {chats?.map((c) => (
           <div
             className="message"
-            key={chat.id}
+            key={c.id}
             style={{
-              backgroundColor: chat.seenBy.includes(currentUser.id)  || chat?.id === c.id
+              backgroundColor: c.seenBy.includes(currentUser.id)  || chat?.id === c.id
                 ? "white"
                 : "#fecd514e",
             }}
-            onClick={() => handleOpenChat(chat.id, chat.receiver)}
+            onClick={() => handleOpenChat(c.id, c.receiver)}
           >
             <img
               src={
-                chat.receiver.avatar ||
+                c.receiver.avatar ||
                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.C8MLNS-O_kwtnrf_GDdfaAHaGm%26pid%3DApi&f=1&ipt=55ae4db309cc68986d8924cf28f7376983fa7a40c858b77d8cf2e436e4de37e2&ipo=images"
               }
               alt=""
             />
-            <span>{chat.receiver.username}</span>
-            <p>{chat.lastMessage}</p>
+            <span>{c.receiver.username}</span>
+            <p>{c.lastMessage}</p>
           </div>
         ))}
       </div>
