@@ -7,8 +7,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": "http://localhost:5000",
+      "/socket.io": { // Ensures WebSockets work through the proxy
+        target: "http://localhost:4000",
+        ws: true,
+      },
       // changeOrigin: true,
-      secure: false,
+      // secure: false,
     },
     allowedHosts: [
       "5173-ogagaakpowe-mernstackre-9fg5uj019rw.ws-eu118.gitpod.io",
